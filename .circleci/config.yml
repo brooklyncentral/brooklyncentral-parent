@@ -48,7 +48,7 @@ jobs:
       - run: mvn source:jar javadoc:jar clean deploy -DdeployTo=sonatype --settings .circleci/settings.xml
 
 # Workflow definitions
-workflow:
+workflows:
   version: 2
   sonatype_deploy:
     jobs:
