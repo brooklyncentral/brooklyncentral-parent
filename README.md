@@ -28,7 +28,9 @@ then deploy `SNAPSHOT` version to sonatype automatically.
 To perform an official release, simply create a branch `release/<version>`, update the version number in the code then push
 your changes. Circle CI will pick up and build the branch but then hold for a manual action to deploy artifacts to sonatype.
 
-You will need to log on https://circleci.com/ and manually approve (or not if tests failed) the deployment.
+You will need to log on [Circle CI](https://circleci.com/) and manually unhold the corresponding release workflow on [this page](https://circleci.com/gh/brooklyncentral/workflows/).
+
+Finally, you will need to log into [sonatype](https://oss.sonatype.org/#stagingRepositories) then close and release the artifact built and deployed by Circle CI.
 
 ### Manual releases
 
