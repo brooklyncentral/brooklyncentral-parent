@@ -9,6 +9,14 @@
     <version>1.0.0-SNAPSHOT</version><!-- BROOKLYN_CENTRAL_PARENT_VERSION -->
     <packaging>pom</packaging>
 
+    <name>BrooklynCentral ROOT</name>
+    <description>
+        BrooklynCentral project root, serving as the ancestor POM for all projects
+        contained in the brooklyncentral GitHub's organisation.
+    </description>
+    <url>https://github.com/brooklyncentral/brooklyncentral-parent</url>
+    <inceptionYear>2017</inceptionYear>
+
     <properties>
         <maven-gpg-plugin.version>1.6</maven-gpg-plugin.version>
     </properties>
