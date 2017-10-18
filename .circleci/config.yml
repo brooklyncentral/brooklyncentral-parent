@@ -43,14 +43,14 @@ jobs:
       - run: mvn dependency:go-offline
       - *base_save_cache
       # Import key in GPG
-      - run: echo $GPG_SECRET_KEY | base64 --decode | $GPG_EXECUTABLE --import
+      - run: echo $GPG_SECRET_KEY | base64 --decode | $GPG_EXECUTABLE --batch --import
       # Deploy to sonatype
-      - run: mvn source:jar javadoc:jar clean deploy -DdeployTo=sonatype --settings .circleci/settings.xml
+      - run: mvn source:jar javadoc:jar clean deploy -DskipTests -DdeployTo=sonatype --settings .circleci/settings.xml
 
 # Workflow definitions
 workflows:
   version: 2
-  sonatype_deploy:
+  deploy_snapshot:
     jobs:
       - build
       # If we are on master, we deploy directly to sonatype (as it contains only SNAPSHOT versions)
@@ -60,9 +60,13 @@ workflows:
             - build
           filters:
             branches:
-              only:
-                - master
-
+              only: master
+  deploy_release:
+    jobs:
+      - build:
+          filters:
+            branches:
+              only: /^release\/.*$/
       # If we are in a release branch, we hold then deploy only upon manual validation
       - hold:
           type: approval
@@ -70,13 +74,11 @@ workflows:
             - build
           filters:
             branches:
-              only:
-                - release/.*
+              only: /^release\/.*$/
       - deploy:
           context: org-global
           requires:
             - hold
           filters:
             branches:
-              only:
-                - release/.*
+              only: /^release\/.*$/
