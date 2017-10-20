@@ -10,7 +10,7 @@ It sets up a profile that can be used to deploy artifacts to sonatype automatica
    <parent>
        <groupId>io.brooklyn</groupId>
        <artifactId>brooklyncentral-parent</artifactId>
-       <version>1.0.0</version> <!-- BROOKLYN_CENTRAL_PARENT_VERSION -->
+       <version>1.0.1</version> <!-- BROOKLYN_CENTRAL_PARENT_VERSION -->
    </parent>
    ``` 
 2. Copy the entire folder `.circleci` and paste it in the root of your project.
