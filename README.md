@@ -10,7 +10,7 @@ It sets up a profile that can be used to deploy artifacts to sonatype automatica
    <parent>
        <groupId>io.brooklyn</groupId>
        <artifactId>brooklyncentral-parent</artifactId>
-       <version>1.0.0</version>
+       <version>1.0.0</version> <!-- BROOKLYN_CENTRAL_PARENT_VERSION -->
    </parent>
    ``` 
 2. Copy the entire folder `.circleci` and paste it in the root of your project.
@@ -26,18 +26,17 @@ then deploy `SNAPSHOT` version to sonatype automatically.
 ### Official releases
 
 To perform an official release, simply create a branch `release/<version>`, update the version number in the code then push
-your changes. Circle CI will pick up and build the branch but then hold for a manual action to deploy artifacts to sonatype.
+your changes. Circle CI will build, sign then deploy artifacts to sonatype automatically.
 
-You will need to log on [Circle CI](https://circleci.com/) and manually unhold the corresponding release workflow on [this page](https://circleci.com/gh/brooklyncentral/workflows/).
-
-Finally, you will need to log into [sonatype](https://oss.sonatype.org/#stagingRepositories) then close and release the artifact built and deployed by Circle CI.
+You will then need to go to the [sonatype UI](https://oss.sonatype.org/#stagingRepositories) to manually
+[close and release artifacts](http://central.sonatype.org/pages/releasing-the-deployment.html).
 
 ### Manual releases
 
 You can always perform manual releases by running the following command:
 
 ```bash
-mvn source:jar javadoc:jar deploy -DdeployTo=sonatype --settings .circleci/settings.xml
+mvn clean deploy -DskipTests -DdeployTo=sonatype --settings .circleci/settings.xml
 ```
 
 Note that you need to setup the following environment variables:
