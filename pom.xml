@@ -19,6 +19,7 @@
 
     <properties>
         <maven-gpg-plugin.version>1.6</maven-gpg-plugin.version>
+        <maven-deploy-plugin.version>2.8.2</maven-deploy-plugin.version>
     </properties>
 
     <scm>
@@ -42,6 +43,20 @@
             <organizationUrl>https://github.com/tbouron</organizationUrl>
         </developer>
     </developers>
+
+    <build>
+        <pluginManagement>
+            <plugins>
+                <plugin>
+                    <!-- Following the release of v 3.0.0-M1 of the deploy plug, the bundle
+                         was failing to deploy to artifactory with "401 unauthorized". The underlying
+                         problem may be as follows: https://issues.apache.org/jira/projects/MDEPLOY/issues/MDEPLOY-244 -->
+                    <artifactId>maven-deploy-plugin</artifactId>
+                    <version>${maven-deploy-plugin.version}</version>
+                </plugin>
+            </plugins>
+        </pluginManagement>
+    </build>
 
     <profiles>
         <profile>
